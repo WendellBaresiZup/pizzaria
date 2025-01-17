@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class Pagamento {
     private Long id;
     private Long pedidoId;
-    private String formaPagamento;
+    private FormaPagamento formaPagamento;
     private double valorPago;
     private LocalDateTime dataHoraPagamento;
 
@@ -28,14 +28,6 @@ public class Pagamento {
         this.pedidoId = pedidoId;
     }
 
-    public String getFormaPagamento() {
-        return formaPagamento;
-    }
-
-    public void setFormaPagamento(String formaPagamento) {
-        this.formaPagamento = formaPagamento;
-    }
-
     public double getValorPago() {
         return valorPago;
     }
@@ -50,5 +42,13 @@ public class Pagamento {
 
     public void setDataHoraPagamento(LocalDateTime dataHoraPagamento) {
         this.dataHoraPagamento = dataHoraPagamento;
+    }
+
+    public FormaPagamento getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(FormaPagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
     }
 }
