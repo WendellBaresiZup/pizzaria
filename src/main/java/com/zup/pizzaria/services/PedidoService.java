@@ -5,7 +5,10 @@ import com.zup.pizzaria.models.Cliente;
 import com.zup.pizzaria.models.Pedido;
 import com.zup.pizzaria.repository.ClienteRepository;
 import com.zup.pizzaria.repository.PedidoRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PedidoService {
@@ -27,5 +30,10 @@ public class PedidoService {
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
 
         return new PedidoDTO(cliente.getNome(), cliente.getEmail(), pedido.getDescricao());
+    }
+
+    public List<Pedido> listarPedidos(){
+        List<Pedido> pedidos = pedidoRepository.findAll();
+        return pedidos;
     }
 }
