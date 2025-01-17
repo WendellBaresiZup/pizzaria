@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/pedidos")
 public class PedidoController {
@@ -22,5 +24,10 @@ public class PedidoController {
     public ResponseEntity<PedidoDTO> criarPedido(@RequestBody Pedido pedido) {
         PedidoDTO pedidoDTO = pedidoService.criarPedido(pedido);
         return ResponseEntity.ok(pedidoDTO);
+    }
+
+    public ResponseEntity<List<Pedido>> listarPedidos(){
+        List<Pedido> pedidos = pedidoService.listarPedidos();
+        return ResponseEntity.ok(pedidos);
     }
 }
