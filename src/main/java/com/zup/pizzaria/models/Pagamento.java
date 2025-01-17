@@ -9,7 +9,21 @@ public class Pagamento {
     private double valorPago;
     private LocalDateTime dataHoraPagamento;
 
-    public Pagamento() {
+
+    public void detalhesPagamento(){
+        System.out.println("ID do Pagamento: " + id);
+        System.out.println("ID do Pedido: " + pedidoId);
+        System.out.println("Forma de Pagamento do Pedido: " + formaPagamento.getDescricaoPagamento());
+        System.out.printf("Valor do Pagamento: R$ %.2f", valorPago);
+        System.out.println("Data e Hora do Pagamento: " + dataHoraPagamento);
+    }
+
+    public boolean validarPagamento(){
+        if (valorPago <= 0){
+            System.out.println("O valor tem que ser maior que 0 e maior que o valor do pedido!!");
+            return false;
+        }
+        return true;
     }
 
     public Long getId() {
