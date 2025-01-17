@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping (value = ("/clientes"))
 public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
 
-    @PostMapping("/clientes")
+    @PostMapping
     public Cliente cadastrarCliente(Cliente cliente){
         return clienteService.cadastrarCliente(cliente);
     }
