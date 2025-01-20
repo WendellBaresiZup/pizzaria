@@ -10,19 +10,21 @@ public class Pagamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long pedidoId;
+    @ManyToOne
+    @JoinColumn(name = "pedido_id", referencedColumnName = "id")
+    private Pedido pedido;
+
+    @Enumerated(EnumType.STRING)
     private FormaPagamento formaPagamento;
     private double valorPago;
     private LocalDateTime dataHoraPagamento;
 
-    @ManyToOne
-    @JoinColumn(name = "pedido_id")
-    private Pedido pedido;
-
+    public Pagamento(){
+    }
 
     public void detalhesPagamento(){
         System.out.println("ID do Pagamento: " + id);
-        System.out.println("ID do Pedido: " + pedidoId);
+        System.out.println("ID do Pedido: " + pedido.getId());
         System.out.println("Forma de Pagamento do Pedido: " + formaPagamento.getDescricaoPagamento());
         System.out.printf("Valor do Pagamento: R$ %.2f", valorPago);
         System.out.println("Data e Hora do Pagamento: " + dataHoraPagamento);
@@ -42,14 +44,6 @@ public class Pagamento {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getPedidoId() {
-        return pedidoId;
-    }
-
-    public void setPedidoId(Long pedidoId) {
-        this.pedidoId = pedidoId;
     }
 
     public double getValorPago() {
