@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PedidoService {
@@ -21,16 +22,15 @@ public class PedidoService {
         this.clienteRepository = clienteRepository;
     }
 
-    public PedidoDTO criarPedido(Pedido pedido) {
+    public ResponseEntity<Object> criarPedido(Pedido pedido) {
         validacoesPedido(pedido);
         pedidoRepository.save(pedido);
 
         // Obtenho cliente
-        Cliente cliente = clienteRepository
-                .findById(pedido.getClienteId())
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+        Cliente cliente = clienteRepository.findById(pedido.getClienteId()).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
 
-        return new PedidoDTO(cliente.getNome(), cliente.getEmail(), pedido.getDescricao());
+        PedidoDTO pedidoDTO = new PedidoDTO(cliente.getNome(), cliente.getEmail(), pedido.getDescricao());
+        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("mensagem", "Pedido cadastrado com sucesso!!", "Dados do Pedido:git", pedidoDTO));
     }
 
     public List<Pedido> listarPedidos(){
@@ -42,11 +42,10 @@ public class PedidoService {
         if (pedido == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro: O pedido não pode ser nulo!!");
         }
-        if (pedido != null) {
+        try {
             return ResponseEntity.status(HttpStatus.CREATED).body("O Pedido foi criado com sucesso!!");
-        }
-        else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao cadastrar pedido!!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao cadastrar o cliente!!");
         }
     }
 }
