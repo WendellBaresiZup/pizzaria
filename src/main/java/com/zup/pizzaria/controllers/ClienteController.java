@@ -18,8 +18,8 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<Object> cadastrarCliente(@RequestBody Cliente cliente) {
-        Cliente clienteCadastrado = clienteService.cadastrarCliente(cliente);
-        return ResponseEntity.ok(clienteCadastrado);
+        ResponseEntity<String> clienteCadastrado = clienteService.cadastrarCliente(cliente);
+        return ResponseEntity.status(clienteCadastrado.getStatusCode()).body(clienteCadastrado.getBody());
     }
 
     @GetMapping
