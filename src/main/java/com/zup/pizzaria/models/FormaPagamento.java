@@ -1,7 +1,8 @@
 package com.zup.pizzaria.models;
 
 public enum FormaPagamento {
-    CARTAO("Cartão"),
+    CARTAO_CREDITO("Cartão de Crédito"),
+    CARTAO_DEBITO("Cartão de Débito"),
     DINHEIRO("Dinheiro"),
     PIX("PIX");
 
