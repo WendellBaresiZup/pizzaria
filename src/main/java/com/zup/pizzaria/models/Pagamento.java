@@ -1,9 +1,6 @@
 package com.zup.pizzaria.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 import java.time.LocalDateTime;
@@ -17,6 +14,10 @@ public class Pagamento {
     private FormaPagamento formaPagamento;
     private double valorPago;
     private LocalDateTime dataHoraPagamento;
+
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
+    private Pagamento pagamento;
 
 
     public void detalhesPagamento(){
