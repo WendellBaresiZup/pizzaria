@@ -15,9 +15,10 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public Cliente cadastrarCliente(Cliente cliente){
+    public ResponseEntity<String> cadastrarCliente(Cliente cliente){
         validacoesCliente(cliente);
-        return clienteRepository.save(cliente);
+        clienteRepository.save(cliente);
+        return ResponseEntity.status(HttpStatus.CREATED).body("O Cliente foi cadastrado com sucesso!");
     }
 
     public List<Cliente> listarClientes(){
