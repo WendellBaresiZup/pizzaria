@@ -17,7 +17,7 @@ public class Pagamento {
 
     @ManyToOne
     @JoinColumn(name = "pedido_id")
-    private Pagamento pagamento;
+    private Pedido pedido;
 
 
     public void detalhesPagamento(){
