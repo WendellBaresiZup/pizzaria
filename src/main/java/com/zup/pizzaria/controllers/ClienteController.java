@@ -18,15 +18,8 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<Object> cadastrarCliente(@RequestBody Cliente cliente) {
-        if (cliente == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro: O nome do cliente não pode ser nulo!!");
-        }
         Cliente clienteCadastrado = clienteService.cadastrarCliente(cliente);
-        if (cliente != null) {
-            return ResponseEntity.status(HttpStatus.CREATED).body("O Cliente foi criado com sucesso!!");
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao cadastrar cliente!!");
-        }
+        return ResponseEntity.ok(clienteCadastrado);
     }
 
     @GetMapping
