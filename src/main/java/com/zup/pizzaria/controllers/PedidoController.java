@@ -21,16 +21,8 @@ public class PedidoController {
 
     @PostMapping
     public ResponseEntity<Object> criarPedido(@RequestBody Pedido pedido) {
-        if (pedido == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro: O pedido não pode ser nulo!!");
-        }
         PedidoDTO pedidoCriado = pedidoService.criarPedido(pedido);
-        if (pedido != null) {
-            return ResponseEntity.status(HttpStatus.CREATED).body("O Pedido foi criado com sucesso!!");
-        }
-        else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao cadastrar pedido!!");
-        }
+        return ResponseEntity.ok(pedidoCriado);
     }
 
     @GetMapping
