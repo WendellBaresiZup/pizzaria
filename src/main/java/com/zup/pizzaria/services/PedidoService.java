@@ -4,7 +4,9 @@ import com.zup.pizzaria.dtos.PedidoDTO;
 import com.zup.pizzaria.models.Cliente;
 import com.zup.pizzaria.models.Pedido;
 import com.zup.pizzaria.repository.ClienteRepository;
+import com.zup.pizzaria.repository.PagamentoRepository;
 import com.zup.pizzaria.repository.PedidoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,10 +18,12 @@ import java.util.Map;
 public class PedidoService {
     private final PedidoRepository pedidoRepository;
     private final ClienteRepository clienteRepository;
+    private final PagamentoRepository pagamentoRepository;
 
-    public PedidoService(PedidoRepository pedidoRepository, ClienteRepository clienteRepository) {
+    public PedidoService(PedidoRepository pedidoRepository, ClienteRepository clienteRepository, PagamentoRepository pagamentoRepository) {
         this.pedidoRepository = pedidoRepository;
         this.clienteRepository = clienteRepository;
+        this.pagamentoRepository = pagamentoRepository;
     }
 
     public ResponseEntity<Object> criarPedido(Pedido pedido) {
@@ -47,5 +51,12 @@ public class PedidoService {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao cadastrar o cliente!!");
         }
+    }
+
+
+    @Transactional
+    public void removerPedido(Long pedidoId){
+        pagamentoRepository.deleteByPedidoId(pedidoId);
+        pedidoRepository.deleteById(pedidoId);
     }
 }
