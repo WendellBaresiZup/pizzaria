@@ -30,4 +30,14 @@ public class PedidoController {
         List<Pedido> pedidos = pedidoService.listarPedidos();
         return ResponseEntity.ok(pedidos);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Object> deletarPedido(@PathVariable(value = "id") Long id){
+        try{
+            pedidoService.removerPedido(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Pedido excluído do banco de dados!");
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao excluir!");
+        }
+    }
 }
