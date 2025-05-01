@@ -13,6 +13,10 @@ public class Pedido {
     private String descricao;
     private Long clienteId;
 
+    public Pedido(){
+
+    }
+
     public Pedido(Long clienteId, String descricao) {
         this.clienteId = clienteId;
         this.descricao = descricao;
